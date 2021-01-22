@@ -42,7 +42,7 @@ const inputsObj = {
     "multiply" : '*',
 };
 
-let inputArray = [5,'+',1,0,'*',1,5,'+',2]; //array of all user entries from listeners
+let inputArray = []; //array of all user entries from listeners
 let variableArray = []; //ordered array of variables to operate on, concated from user entries
 let operatorArray = []; //ordered array of user selected operators
 let var1;
@@ -57,11 +57,18 @@ buttons.forEach((button) => {
 
     // and for each one we add a 'click' listener
     button.addEventListener('click', () => {
-      console.log(inputsObj[`${button.id}`]);
-      inputArray.push(inputsObj[`${button.id}`]);
-      console.log(inputArray);
+      
+      if(button.id === "equals") {
+          console.log(operate(inputArray));
+          inputArray = [0];
+      } else {
+          inputArray.push(inputsObj[`${button.id}`]);
+            console.log({inputArray});
+        };
+        
+        
     });
-  });
+});
 
 
 function compute(x,y,o) {
@@ -94,7 +101,7 @@ function createArrays(inputArray) {
 
             operatorArray.push(i);
             variableArray.push(Number(tempArray.join('')));
-            tempArray = [];
+            tempArray = [0];
 
         };
         
@@ -109,6 +116,9 @@ function operate(inputArray) {
 
     console.log('variable array: ' + variableArray + ' - operator array: ' + operatorArray + ' - inputArray: ' + inputArray)
 
+    let acc = 0;
+    let currVal = 0;
+
     let finalValue = variableArray.reduce(function(acc, currVal,) {
 
         let op = operatorArray.shift();
@@ -119,8 +129,8 @@ function operate(inputArray) {
 
     },);
 
+    variableArray = []; //clears variable Arary for next calculation
+
     return finalValue;
     
 };
-
-console.log('operate(inputArray): ' + operate(inputArray));
