@@ -20,7 +20,27 @@
         - Loop through until all variables and operators have been computed
         - output final tempVar as resultVar
 */        
-
+const inputsObj = {
+    "clear" : "clear",
+    "sqrt" : "sqrt",
+    "percent" : "%",
+    "divide" : '/',
+    "seven" : 7,
+    "eight" : 8,
+    "nine" : 9,
+    "four" : 4,
+    "five" : 5,
+    "six" : 6,
+    "one" : 1, 
+    "two" : 2,
+    "three" : 3,
+    "zero" : 0,
+    "decimel" : ".",
+    "equals" : "equals",
+    "plus" : '+',
+    "subtract" : '-',
+    "multiply" : '*',
+};
 
 let inputArray = [5,'+',1,0,'*',1,5,'+',2]; //array of all user entries from listeners
 let variableArray = []; //ordered array of variables to operate on, concated from user entries
@@ -28,6 +48,20 @@ let operatorArray = []; //ordered array of user selected operators
 let var1;
 let var2;
 let tempVar; //temporary variable that stores running total from previous calculations
+
+//listener setup
+
+const buttons = document.querySelectorAll('.button');
+
+buttons.forEach((button) => {
+
+    // and for each one we add a 'click' listener
+    button.addEventListener('click', () => {
+      console.log(inputsObj[`${button.id}`]);
+      inputArray.push(inputsObj[`${button.id}`]);
+      console.log(inputArray);
+    });
+  });
 
 
 function compute(x,y,o) {

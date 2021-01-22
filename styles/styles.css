@@ -19,7 +19,7 @@
     padding: 10px;
     gap: 10px 10px;
     grid-template-columns: 75px 75px 75px 75px;
-    grid-template-rows: 40px auto 75px 75px 75px 75px;
+    grid-template-rows: 40px auto 75px 75px 75px 75px 75px;
 
 }
 
@@ -66,9 +66,14 @@
     grid-row: 6 / 7;
 }
 
+.row5{
+    background-color: rgb(98, 0, 128);
+    grid-row: 7 / 8;
+}
+
 .plus {
     background-color: indigo;
-    grid-area:  5 / 4 / 7 / 5;
+    grid-area:  6 / 4 / 8 / 5;
 }
 
 .display {
