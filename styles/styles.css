@@ -115,17 +115,17 @@
     }
   }
   .hvr-push {
-    display: inline-block;
+
     vertical-align: middle;
     -webkit-transform: perspective(1px) translateZ(0);
     transform: perspective(1px) translateZ(0);
     box-shadow: 0 0 1px rgba(0, 0, 0, 0);
   }
-  .hvr-push:hover, .hvr-push:focus, .hvr-push:active {
+  .hvr-push:focus, .hvr-push:active {
     -webkit-animation-name: hvr-push;
     animation-name: hvr-push;
-    -webkit-animation-duration: 0.3s;
-    animation-duration: 0.3s;
+    -webkit-animation-duration: 0.5s;
+    animation-duration: 0.5s;
     -webkit-animation-timing-function: linear;
     animation-timing-function: linear;
     -webkit-animation-iteration-count: 1;
