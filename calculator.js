@@ -93,7 +93,7 @@ function createArrays(inputArray) {
             variableArray.push(Number(tempArray.join('')));
             tempArray = [];
 
-        } else if(typeof i === 'number') {
+        } else if(typeof i === 'number' || i === '.') {
 
             tempArray.push(i);
 
