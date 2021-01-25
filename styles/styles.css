@@ -78,12 +78,13 @@
 
 .display {
     padding: 5px;
+    min-height: 100px;
 }
 
 .displayvalues {
     text-align: right;
-    font-weight: 1000;
-    font-size: 25px;
+    font-weight: 400;
+    font-size: 35px;
     font-family: 'VT323', monospace;
 }
 
