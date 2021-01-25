@@ -53,10 +53,15 @@ let tempVar; //temporary variable that stores running total from previous calcul
 const total = document.querySelector('#total');
 const totalContent = document.createElement('div');
 totalContent.classList.add('totalContent');
+totalContent.textContent = "0";
+total.appendChild(totalContent);
 
 const tally = document.querySelector('#tally');
 const tallyContent = document.createElement('div');
 tallyContent.classList.add('tallyContent')
+tallyContent.textContent = "0";
+tally.appendChild(tallyContent);
+
 
 //listener setup
 
@@ -71,8 +76,7 @@ buttons.forEach((button) => {
 
         totalContent.textContent = operate(inputArray);
         total.appendChild(totalContent);
-        console.log(operate(inputArray));
-        inputArray = [0];
+        inputArray = [];
 
       } else if (button.id === "clear") {
 
@@ -89,15 +93,11 @@ buttons.forEach((button) => {
         inputArray.push(inputsObj[`${button.id}`]);
         tallyContent.textContent = inputArray.join('');
         tally.appendChild(tallyContent);
-        console.log({inputArray});
 
-        };
-        
+        };        
         
     });
 });
-
-
 
 
 function compute(x,y,o) {
@@ -141,27 +141,23 @@ function createArrays(inputArray) {
 
         };
         
-        console.log("i: " + i + " - inputArray.length: " + inputArray.length + " - tempArray: " + tempArray + " - operatorArray: " + operatorArray + " - variableArray: " + variableArray);
-
     }; //end while loop
 }; 
 
 function operate(inputArray) {
 
-    variableArray = [];
+    variableArray = []; //clears variable Array for next calculation
 
     createArrays(inputArray);
 
-    return  variableArray.reduce(function(acc, currVal) {
+    while( variableArray.length > 0 ) {
 
-        let op = operatorArray.shift();
+        return  variableArray.reduce(function(acc, currVal) {
 
-        console.log("accum: " + acc + " - currVal: " + currVal )
-
-        return acc = compute(acc,currVal,op);
-
-    }, );
-
-     //clears variable Array for next calculation
+            let op = operatorArray.shift();
+            return acc = compute(acc,currVal,op);
+    
+        }, );
+    };
     
 };
