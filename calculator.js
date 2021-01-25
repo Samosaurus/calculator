@@ -49,6 +49,15 @@ let var1;
 let var2;
 let tempVar; //temporary variable that stores running total from previous calculations
 
+//display setup
+const total = document.querySelector('#total');
+const totalContent = document.createElement('div');
+totalContent.classList.add('totalContent');
+
+const tally = document.querySelector('#tally');
+const tallyContent = document.createElement('div');
+tallyContent.classList.add('tallyContent')
+
 //listener setup
 
 const buttons = document.querySelectorAll('.button');
@@ -59,16 +68,36 @@ buttons.forEach((button) => {
     button.addEventListener('click', () => {
       
       if(button.id === "equals") {
-          console.log(operate(inputArray));
-          inputArray = [0];
+
+        totalContent.textContent = operate(inputArray);
+        total.appendChild(totalContent);
+        console.log(operate(inputArray));
+        inputArray = [0];
+
+      } else if (button.id === "clear") {
+
+        inputArray = [];
+        variableArray = [];
+        operatorArray = [];
+        totalContent.textContent = "0";
+        total.appendChild(totalContent);
+        tallyContent.textContent = "0";
+        tally.appendChild(tallyContent);
+
       } else {
-          inputArray.push(inputsObj[`${button.id}`]);
-            console.log({inputArray});
+
+        inputArray.push(inputsObj[`${button.id}`]);
+        tallyContent.textContent = inputArray.join('');
+        tally.appendChild(tallyContent);
+        console.log({inputArray});
+
         };
         
         
     });
 });
+
+
 
 
 function compute(x,y,o) {
@@ -84,6 +113,13 @@ function compute(x,y,o) {
 function createArrays(inputArray) {
 
     let tempArray = [];
+
+    //iterates through inputArray and looks at each value. 
+    //If the value is a number, it gets pushed to the tempArray.
+    //If the value is an operator
+        //the operator gets pushed into the operatorArray
+        //the tempArray gets joined and pushed into the variableArray
+    //When the last inputArray value is evaluated, it gets pushed into the variableArray and the tempArray is reset
 
     while( (i = inputArray.shift()) !== undefined ) {
         
@@ -101,7 +137,7 @@ function createArrays(inputArray) {
 
             operatorArray.push(i);
             variableArray.push(Number(tempArray.join('')));
-            tempArray = [0];
+            tempArray = [];
 
         };
         
@@ -112,14 +148,11 @@ function createArrays(inputArray) {
 
 function operate(inputArray) {
 
+    variableArray = [];
+
     createArrays(inputArray);
 
-    console.log('variable array: ' + variableArray + ' - operator array: ' + operatorArray + ' - inputArray: ' + inputArray)
-
-    let acc = 0;
-    let currVal = 0;
-
-    let finalValue = variableArray.reduce(function(acc, currVal,) {
+    return  variableArray.reduce(function(acc, currVal) {
 
         let op = operatorArray.shift();
 
@@ -127,10 +160,8 @@ function operate(inputArray) {
 
         return acc = compute(acc,currVal,op);
 
-    },);
+    }, );
 
-    variableArray = []; //clears variable Arary for next calculation
-
-    return finalValue;
+     //clears variable Array for next calculation
     
 };
